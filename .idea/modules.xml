@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/h2mpoi.iml" filepath="$PROJECT_DIR$/.idea/h2mpoi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PoI/poi.iml" filepath="$PROJECT_DIR$/PoI/poi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PoI-Test/poi-test.iml" filepath="$PROJECT_DIR$/PoI-Test/poi-test.iml" />
+    </modules>
+  </component>
+</project>
