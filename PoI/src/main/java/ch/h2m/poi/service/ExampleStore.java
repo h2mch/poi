@@ -16,11 +16,11 @@ import javax.json.JsonValue;
 @ApplicationScoped
 public class ExampleStore {
 
-    private ConcurrentHashMap<String, JsonObject> store;
+    private ConcurrentHashMap<String, JsonObject> exampleStore;
 
     @PostConstruct
     public void init() {
-        store = new ConcurrentHashMap<>();
+        this.exampleStore = new ConcurrentHashMap<>();
     }
 
     public JsonObject save(JsonObject input, String href, String date) {
@@ -42,16 +42,17 @@ public class ExampleStore {
         }
 
         JsonObject storedObject = builder.build();
-        store.put(id, storedObject);
+        exampleStore.put(id, storedObject);
 
         return storedObject;
     }
 
     public Collection<JsonObject> getAll() {
-        return store.values();
+        return exampleStore.values();
     }
 
     public Optional<JsonObject> getById(String id) {
-        return Optional.ofNullable(store.get(id));
+        return Optional.ofNullable(exampleStore.get(id));
     }
+
 }

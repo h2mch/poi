@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 
-import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -25,8 +24,8 @@ import javax.ws.rs.core.UriInfo;
 import ch.h2m.poi.service.ExampleService;
 import ch.h2m.poi.service.ExampleStore;
 
-@Stateless
 @Path("example")
+@Produces(MediaType.APPLICATION_JSON)
 public class ExampleResource {
 
     @Inject
@@ -69,13 +68,13 @@ public class ExampleResource {
 
         Optional<JsonObject> example = exampleStore.getById(id);
 
-        if (example.isPresent()) {
-            return Response.ok(example.get()).build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-
-
+        return example
+                .map(jsonObject -> Response
+                        .ok(jsonObject)
+                        .build())
+                .orElseGet(() -> Response
+                        .status(Response.Status.NOT_FOUND)
+                        .build());
     }
 
 
