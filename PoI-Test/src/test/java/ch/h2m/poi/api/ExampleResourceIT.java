@@ -23,7 +23,7 @@ import org.junit.Test;
 public class ExampleResourceIT {
 
     private WebTarget webTarget;
-    static final String EXAMPLE_URI = "http://localhost:8080/h2mpoi/resources/example";
+    private static final String EXAMPLE_URI = "http://localhost:8080/h2mpoi/resources/example";
 
     @Before
     public void init() {
@@ -45,12 +45,12 @@ public class ExampleResourceIT {
         assertThat(postResponse.getStatus(), is(201));
 
         JsonObject jsonResult = postResponse.readEntity(JsonObject.class);
-        String rel = jsonResult.getString("rel");
-        assertThat(rel, startsWith(EXAMPLE_URI));
+        String href = jsonResult.getJsonObject("links").getString("href");
+        assertThat(href, startsWith(EXAMPLE_URI));
 
 
         Response getResponse = ClientBuilder.newClient()
-                .target(rel)
+                .target(href)
                 .request(MediaType.APPLICATION_JSON)
                 .get();
 
